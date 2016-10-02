@@ -1,0 +1,17 @@
+{
+    "entrypoint": "index.html",
+    "shell": "src/regex-app/regex-app.html",
+    "fragments": [
+        "bower_components/polymer/polymer.html",
+        "src/vz-matches.html",
+        "src/vz-preview.html",
+        "src/vz-regex.html",
+        "src/vz-replace.html"
+    ],
+    "sourceGlobs": [
+        "manifest.json"
+    ],
+    "includeDependencies": [
+        "bower_components/webcomponentsjs/webcomponents-lite.min.js"
+    ]
+}
