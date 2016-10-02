@@ -9,6 +9,7 @@
         "src/vz-replace.html"
     ],
     "sourceGlobs": [
+        "images/**/*",
         "manifest.json"
     ],
     "includeDependencies": [
