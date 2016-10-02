@@ -1,0 +1,89 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="alu-horizontal/alu-vertical.html">
+
+<dom-module id="vz-replace">
+  <template>
+    <style>
+      :host {
+        display: block;
+        padding: 0 16px;
+        height: 100%;
+      }
+
+      h4 {
+        @apply(--paper-font-subhead;
+        margin-bottom: 8px;
+
+        color: #737373;);
+      }
+
+      #replace {
+
+        color: #212121;
+        -webkit-appearance: none;
+        text-align: inherit;
+        font-family: 'Roboto', 'Noto', sans-serif;
+        -webkit-font-smoothing: antialiased;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 24px;
+      }
+
+      paper-fab {
+        float: right;
+        margin-top: 16px;
+      }
+    </style>
+    <alu-vertical>
+      <div>  <paper-fab mini icon="icons:visibility" title="Switch to preview view" on-tap="fireToggle"></paper-fab>
+        <h4>Replace
+          <paper-input value="{{replace}}"></paper-input>
+        </h4></div>
+
+
+      <pre class="flex" id="replace" style="overflow: scroll">[[_output]]</pre>
+    </alu-vertical>
+  </template>
+  <script>
+
+    Polymer({
+
+      is: 'vz-replace',
+
+      properties: {
+        matches: {
+          type: Array
+        },
+        pattern: {
+          type: RegExp
+        },
+        input: {
+          type: String
+        },
+        expression: {
+          type: RegExp
+        },
+        replace: {
+          type: String,
+          value: '--$0 => $1 $0'
+        },
+        _output:{
+          type:String
+        }
+      },
+      observers: ["render(matches,input,expression, replace)"],
+      render: function (matches, input, expression, replace) {
+        // chrome kann nicht mit $0 umgehen :-(
+        this.set('_output', input.replace(expression, function (a) {
+          var replacement = a.replace(expression, replace);
+          return replacement.replace(/\$0/g, a);
+        }))
+      },
+      fireToggle: function () {
+        this.fire('toggle')
+      }
+
+    });
+  </script>
+</dom-module>

@@ -1,0 +1,63 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+
+<dom-module id="vz-regex">
+  <template>
+    <style>
+      :host {
+        display: none;
+      }
+    </style>
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'vz-regex',
+
+      properties: {
+        pattern: {
+          type: String
+        },
+        input: {
+          type: String
+        },
+        global: {
+          type: Boolean,
+          value: true,
+          notify: true
+        },
+        insensitive: {
+          type: Boolean,
+          value: true,
+          notify: true
+        },
+        multiline: {
+          type: Boolean,
+          value: true,
+          notify: true
+        },
+        matches: {
+          type: Array,
+          readOnly: true,
+          notify: true
+        },
+        expression:{
+          type:RegExp,
+          notify:true
+        }
+      },
+      observers:['_update(pattern, input, global, insensitive, multiline)'],
+      _update: function () {
+          var flags = '';
+          this.global ? flags += 'g' : '';
+          this.insensitive ? flags += 'i' : '';
+          this.multiline ? flags += 'm' : '';
+          var exp = new RegExp(this.pattern, flags);
+          this.set('expression',exp);
+          this._setMatches(this.input.match(exp));
+      }
+
+    });
+  </script>
+</dom-module>

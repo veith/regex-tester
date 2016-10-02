@@ -1,0 +1,153 @@
+<!doctype html>
+<html>
+<head>
+  <title>alu-avatarcard demo</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
+  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+
+  <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+  <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+
+  <link rel="import" href="../alu-horizontal.html">
+
+
+  <style is="custom-style" include="demo-pages-shared-styles">
+    .green{
+      background-color: green;
+      color: whitesmoke;
+      text-align: center;
+      line-height: 40px;
+    }
+    .orange{
+      background-color: orange;
+      color: black;
+      text-align: center;
+      line-height: 40px;
+    }
+    .blue{
+      background-color: #578cff;
+      color: black;
+      text-align: center;
+      line-height: 40px;
+    }
+    alu-horizontal{
+      height: 40px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="vertical-section-container centered">
+  <h2>alu-horizontal</h2>
+  In einem alu-horizontal können beliebige Kindelemente liegen. Die Grössenangaben (flex, flex-3,...) werden über einfache Klassen vergeben.
+
+  <h3>Einfaches Flex</h3>
+  Alle Elemente bekommen gleich viel Platz
+  <demo-snippet>
+    <template>
+      <alu-horizontal>
+        <div class="flex green">A</div>
+        <div class="flex orange">B</div>
+        <div class="flex blue">C</div>
+      </alu-horizontal>
+    </template>
+  </demo-snippet>
+
+  <h3>Flex mit Ratio</h3>
+  Elemente sind im Verhältnis des angegebenen Ratio zueinander (flex-1 bis flex-12).
+  <demo-snippet>
+    <template>
+      <alu-horizontal>
+        <div class="flex-5 green">A</div>
+        <div class="flex-8 orange">B</div>
+      </alu-horizontal>
+    </template>
+  </demo-snippet>
+
+
+  <h3>Mittig angeordnet</h3>
+  Sind alle Elemente ".flex" bekommt jeder genau gleich viel Platz. Durch die Angabe von ".center" auf dem alu-horizontal werden alle Elemente eingemittet.
+  <demo-snippet>
+    <template>
+      <alu-horizontal class="center">
+        <div class="flex green">A</div>
+        <div class="flex orange">B braucht Platz</div>
+        <div class="flex green">C</div>
+        <div class="flex orange">D ist klein</div>
+        <div class="flex green">E</div>
+      </alu-horizontal>
+    </template>
+  </demo-snippet>
+
+  <h3>Oben angeordnet</h3>
+  Durch die Angabe von ".start" auf dem alu-horizontal werden alle Elemente nach oben hin ausgerichtet.
+  <demo-snippet>
+    <template>
+      <alu-horizontal class="start">
+        <div class="flex green">A</div>
+        <div class="flex orange">B braucht Platz</div>
+        <div class="flex green">C</div>
+        <div class="flex orange">D ist klein</div>
+        <div class="flex green">E</div>
+      </alu-horizontal>
+    </template>
+  </demo-snippet>
+
+  <h3>Unten angeordnet</h3>
+  Durch die Angabe von ".end" auf dem alu-horizontal werden alle Elemente nach unten hin ausgerichtet.
+  <br>
+  <br>
+  <br>
+  <demo-snippet>
+    <template>
+      <alu-horizontal class="end">
+        <div class="flex green">A</div>
+        <div class="flex orange">B braucht Platz</div>
+        <div class="flex green">C</div>
+        <div class="flex orange">D ist klein</div>
+        <div class="flex green">E</div>
+      </alu-horizontal>
+    </template>
+  </demo-snippet>
+
+  <h3>Flex Ratios</h3>
+  Die flex Angaben mit den Zahlen sind Grössenverhältnisse der Elemente in einem alu-horizontal.
+  <demo-snippet>
+    <template>
+      <alu-horizontal>
+        <div class="flex-5 green">A 5</div>
+        <div class="flex-3 orange">B 3</div>
+        <div class="flex-1 blue">C 1</div>
+      </alu-horizontal>
+    </template>
+  </demo-snippet>
+
+  <h3>Mischen von flex und nicht flex Elementen</h3>
+  Elemente ohne flex Angaben, bestimmen ihre Grösse selbst, bzw. nehmen genau den Platz ein den sie brauchen.
+  Die Anderen Elemente teilen sich den übrigen Platz unter Einhaltung ihrer Grössenverältnisse.
+  <demo-snippet>
+    <template>
+      <alu-horizontal>
+        <div class="green">&lt;-- A 5 --&gt;</div>
+        <div class="flex-3 orange">B 3</div>
+        <div class="flex-1 blue">C 1</div>
+      </alu-horizontal>
+    </template>
+  </demo-snippet>
+
+  <h3>flex-max </h3>
+  Nicht empfehlenswert
+  <demo-snippet>
+    <template>
+      <alu-horizontal>
+        <div class="flex green">A</div>
+        <div class="flex-max orange">B braucht Platz</div>
+      </alu-horizontal>
+    </template>
+  </demo-snippet>
+
+</div>
+
+</body>
+</html>

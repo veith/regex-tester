@@ -1,0 +1,129 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-checkbox/paper-checkbox.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/paper-input/paper-textarea.html">
+<link rel="import" href="../../bower_components/paper-styles/shadow.html">
+<link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
+
+<link rel="import" href="../alu-horizontal/alu-horizontal.html">
+<link rel="import" href="../alu-horizontal/alu-vertical.html">
+<link rel="import" href="../vz-regex.html">
+<link rel="import" href="../vz-matches.html">
+<link rel="import" href="../vz-preview.html">
+<link rel="import" href="../vz-replace.html">
+
+
+<dom-module id="regex-app">
+  <template>
+    <style>
+      :host {
+        display: block;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        top: 0;
+        padding: 16px;
+      }
+
+      .fullbleed {
+        height: 100%;
+      }
+
+      .card {
+        @apply(--shadow-elevation-2dp);
+        margin: 4px;
+
+      }
+
+      .scroll {
+        overflow: scroll
+      }
+
+      .abstand {
+        padding: 0 16px 16px;
+      }
+
+      h4 {
+        @apply(--paper-font-subhead);
+        margin-bottom: -16px;
+        color: #737373;
+      }
+
+      paper-checkbox {
+        margin-right: 16px;
+      }
+    </style>
+    <vz-regex global="{{global}}"
+              multiline="{{multiline}}"
+              insensitive="{{insensitive}}"
+              pattern="{{_pattern}}"
+              input="{{_input}}"
+              matches="{{_matches}}"
+              expression="{{_expression}}"
+
+    ></vz-regex>
+
+    <alu-vertical>
+      <div class="card abstand">
+        <paper-input label="Pattern" value="{{_pattern}}"></paper-input>
+        <paper-checkbox checked="{{global}}">global</paper-checkbox>
+        <paper-checkbox checked="{{multiline}}">multiline</paper-checkbox>
+        <paper-checkbox checked="{{insensitive}}">case insensitive</paper-checkbox>
+      </div>
+      <div class="flex-2 card abstand scroll">
+        <h4>Search text</h4>
+        <paper-textarea value="{{_input}}" ></paper-textarea>
+      </div>
+
+      <alu-horizontal class="flex-3">
+        <vz-matches class="flex-3 card" matches="[[_matches]]"></vz-matches>
+        <iron-pages role="main" class="flex-8 card" selected="[[mode]]" attr-for-selected="name">
+          <vz-preview name="preview" matches="[[_matches]]" expression="[[_expression]]" input="[[_input]]"
+                      on-toggle="toggleMode"></vz-preview>
+          <vz-replace name="replace" matches="[[_matches]]" expression="[[_expression]]" input="[[_input]]"
+                      on-toggle="toggleMode"></vz-replace>
+        </iron-pages>
+      </alu-horizontal>
+
+
+    </alu-vertical>
+
+
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'regex-app',
+
+      properties: {
+        _pattern: {
+          type: String,
+          value: "([^\\s]+)@(.+)\\.([^\\s]+)"
+
+        },
+        _input: {
+          type: String,
+          value: "veithz@gmail.com\nvzaech@gmail.com"
+        },
+        /**
+         * Schalte zwischen preview und replace um
+         */
+        mode: {
+          type: String,
+          value: 'preview'
+        }
+      },
+      toggleMode: function () {
+        if (this.mode == 'preview') {
+          this.set('mode', 'replace')
+        } else {
+          this.set('mode', 'preview')
+        }
+
+      }
+
+    });
+  </script>
+</dom-module>

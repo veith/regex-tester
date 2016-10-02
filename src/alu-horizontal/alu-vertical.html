@@ -1,0 +1,120 @@
+<!--
+@license
+Copyright (c) 2016 Adcubum AG. All rights reserved.
+-->
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<!--
+`<alu-vertical>` ist eine Layout Komponente um Elemente flexibel in Spalten auszurichten. Ein alu-vertical kann beliebige Kinder enthalten, auch sich selbst.
+
+### CSS
+alu-vertical nimmt per default die volle Höhe ein.
+  - start richtet Elemente nach oben aus
+  - center richtet Elemente mittig aus
+  - end richtet Elemente nach unten aus
+
+Klassen der Kindelemente:
+ - flex gibt dem Element eine dynamische Breite
+ - flex-1 bis flex-12 bestimmt das Grössenverhältnis unter den Elementen. Achtung: Bitte nicht verwechseln, dies ist **kein** 12er Grid Layout!
+ - flex-auto ignoriert unter Umständen bei allen Geschwisterelementen die Grössenverhältnisse, nimmt für sich den OPTIMALEN Platz ein. **Mit Vorsicht zu geniessen.**
+
+Schau am Besten in die Demos rein
+
+@author veith
+@date 05.07.16
+@hero path/to/image
+@demo demo/index.html
+-->
+
+<dom-module id="alu-vertical">
+
+  <template>
+
+    <style>
+      :host {
+        display: block;
+        height: 100%;
+        @apply(--layout-vertical);
+      }
+
+      :host(.center) {
+        @apply(--layout-center);
+      }
+
+      :host(.start) {
+        @apply(--layout-start);
+      }
+
+      :host(.end) {
+        @apply(--layout-end);
+      }
+
+      ::content > .flex {
+        @apply(--layout-flex);
+      }
+
+      ::content > .flex-1 {
+        @apply(--layout-flex);
+      }
+
+      ::content > .flex-2 {
+        @apply(--layout-flex-2);
+      }
+
+      ::content > .flex-3 {
+        @apply(--layout-flex-3);
+      }
+
+      ::content > .flex-4 {
+        @apply(--layout-flex-4);
+      }
+
+      ::content > .flex-5 {
+        @apply(--layout-flex-5);
+      }
+
+      ::content > .flex-6 {
+        @apply(--layout-flex-6);
+      }
+
+      ::content > .flex-7 {
+        @apply(--layout-flex-7);
+      }
+
+      ::content > .flex-8 {
+        @apply(--layout-flex-8);
+      }
+
+      ::content > .flex-9 {
+        @apply(--layout-flex-9);
+      }
+
+      ::content > .flex-10 {
+        @apply(--layout-flex-10);
+      }
+
+      ::content > .flex-11 {
+        @apply(--layout-flex-11);
+      }
+
+      ::content > .flex-12 {
+        @apply(--layout-flex-12);
+      }
+
+      ::content > .flex-auto {
+        @apply(--layout-flex-auto);
+      }
+
+    </style>
+
+    <content></content>
+  </template>
+
+  <script>
+
+    Polymer({
+      is: 'alu-vertical',
+      properties: {}
+    });
+  </script>
+</dom-module>

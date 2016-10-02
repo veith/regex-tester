@@ -1,0 +1,7 @@
+{
+  "name": "regex",
+  "short_name": "regex",
+  "description": "Regex tester",
+  "start_url": "/",
+  "display": "standalone"
+}

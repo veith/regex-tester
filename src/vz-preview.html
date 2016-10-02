@@ -1,0 +1,86 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/paper-fab/paper-fab.html">
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="alu-horizontal/alu-vertical.html">
+
+<dom-module id="vz-preview">
+  <template>
+    <style>
+      :host {
+        display: block;
+        padding: 0 16px;
+        height: 100%;
+      }
+      .fullbleed {
+        height: 100%;
+      }
+
+      h4 {
+        @apply(--paper-font-subhead);
+        margin-bottom: 8px;
+
+        color: #737373;
+      }
+
+      #preview {
+
+        color: #212121;
+        -webkit-appearance: none;
+        text-align: inherit;
+        font-family: 'Roboto', 'Noto', sans-serif;
+        -webkit-font-smoothing: antialiased;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 24px;
+      }
+
+      paper-fab {
+        float: right;
+        margin-top: 16px;
+      }
+    </style>
+
+    <alu-vertical >
+      <div>
+        <paper-fab mini icon="icons:find-replace" title="Switch to replace view" on-tap="fireToggle"></paper-fab>
+        <h4>Preview </h4>
+      </div>
+
+      <div class="flex" style="overflow: scroll">
+        <div id="preview"></div>
+      </div>
+    </alu-vertical>
+  </template>
+  <script>
+
+    Polymer({
+
+      is: 'vz-preview',
+
+      properties: {
+        matches: {
+          type: Array
+        },
+        pattern: {
+          type: RegExp
+        },
+        input: {
+          type: String
+        },
+        expression: {
+          type: RegExp
+        }
+      },
+      observers: ["render(matches,input,expression)"],
+      render: function (matches, input, expression) {
+        this.$.preview.innerHTML = input.replace(expression, function (i, a) {
+          return '<span style="background-color:#FFEB3B;">' + i + '</span>'
+        }).replace(/\n/g, "<br>").replace(/\s{2}/g, "&nbsp;&nbsp;");
+      },
+      fireToggle: function () {
+        this.fire('toggle')
+      }
+
+    });
+  </script>
+</dom-module>
