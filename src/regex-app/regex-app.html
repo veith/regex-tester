@@ -53,6 +53,9 @@
       paper-checkbox {
         margin-right: 16px;
       }
+      .matches{
+        width: 300px;
+      }
     </style>
     <vz-regex global="{{global}}"
               multiline="{{multiline}}"
@@ -77,7 +80,7 @@
       </div>
 
       <alu-horizontal class="flex-3">
-        <vz-matches class="flex-3 card" matches="[[_matches]]"></vz-matches>
+        <vz-matches class="card matches" matches="[[_matches]]"></vz-matches>
         <iron-pages role="main" class="flex-8 card" selected="[[mode]]" attr-for-selected="name">
           <vz-preview name="preview" matches="[[_matches]]" expression="[[_expression]]" input="[[_input]]"
                       on-toggle="toggleMode"></vz-preview>
@@ -93,6 +96,7 @@
   </template>
 
   <script>
+
     Polymer({
 
       is: 'regex-app',
@@ -100,12 +104,13 @@
       properties: {
         _pattern: {
           type: String,
-          value: "([^\\s]+)@(.+)\\.([^\\s]+)"
-
+          value: function(){ return localStorage.getItem('pattern') || '';},
+          observer:'_savePattern'
         },
         _input: {
           type: String,
-          value: "someone@gmail.com\nsomeother@gmail.com"
+          value: function(){ return localStorage.getItem('input') || '';},
+          observer:'_saveInput'
         },
         /**
          * Schalte zwischen preview und replace um
@@ -121,9 +126,13 @@
         } else {
           this.set('mode', 'preview')
         }
-
+      },
+      _savePattern:function () {
+        localStorage.setItem('pattern', this._pattern);
+      },
+      _saveInput:function () {
+        localStorage.setItem('input', this._input);
       }
-
     });
   </script>
 </dom-module>

@@ -74,8 +74,8 @@
       observers: ["render(matches,input,expression)"],
       render: function (matches, input, expression) {
         this.$.preview.innerHTML = input.replace(expression, function (i, a) {
-          return '<span style="background-color:#FFEB3B;">' + i + '</span>'
-        }).replace(/\n/g, "<br>").replace(/\s{2}/g, "&nbsp;&nbsp;");
+          return 'ƒƒƒƒƒstartƒƒƒƒƒ style="background-color:#FFEB3B;">' + i + 'ƒƒƒƒƒendƒƒƒƒƒ'
+        }).replace(/</g, "&lt;").replace(/ƒƒƒƒƒstartƒƒƒƒƒ/g, "<span").replace(/ƒƒƒƒƒendƒƒƒƒƒ/g, "</span>").replace(/\n/g, "<br>").replace(/\s{2}/g, "&nbsp;&nbsp;");
       },
       fireToggle: function () {
         this.fire('toggle')
