@@ -53,7 +53,8 @@
       paper-checkbox {
         margin-right: 16px;
       }
-      .matches{
+
+      .matches {
         width: 300px;
       }
     </style>
@@ -76,7 +77,7 @@
       </div>
       <div class="flex-2 card abstand scroll">
         <h4>Search text</h4>
-        <paper-textarea value="{{_input}}" ></paper-textarea>
+        <paper-textarea value="{{_input}}"></paper-textarea>
       </div>
 
       <alu-horizontal class="flex-3">
@@ -84,7 +85,7 @@
         <iron-pages role="main" class="flex-8 card" selected="[[mode]]" attr-for-selected="name">
           <vz-preview name="preview" matches="[[_matches]]" expression="[[_expression]]" input="[[_input]]"
                       on-toggle="toggleMode"></vz-preview>
-          <vz-replace name="replace" matches="[[_matches]]" expression="[[_expression]]" input="[[_input]]"
+          <vz-replace name="replace" matches="[[_matches]]" expression="[[_expression]]" input="[[_input]]" replace="{{_replace}}"
                       on-toggle="toggleMode"></vz-replace>
         </iron-pages>
       </alu-horizontal>
@@ -104,13 +105,24 @@
       properties: {
         _pattern: {
           type: String,
-          value: function(){ return localStorage.getItem('pattern') || '';},
-          observer:'_savePattern'
+          value: function () {
+            return localStorage.getItem('pattern') || '';
+          },
+          observer: '_savePattern'
         },
         _input: {
           type: String,
-          value: function(){ return localStorage.getItem('input') || '';},
-          observer:'_saveInput'
+          value: function () {
+            return localStorage.getItem('input') || '';
+          },
+          observer: '_saveInput'
+        }, 
+        _replace: {
+          type: String,
+          value: function () {
+            return localStorage.getItem('replace') || '';
+          },
+          observer: '_saveReplace'
         },
         /**
          * Schalte zwischen preview und replace um
@@ -127,11 +139,14 @@
           this.set('mode', 'preview')
         }
       },
-      _savePattern:function () {
+      _savePattern: function () {
         localStorage.setItem('pattern', this._pattern);
       },
-      _saveInput:function () {
+      _saveInput: function () {
         localStorage.setItem('input', this._input);
+      },
+      _saveReplace: function () {
+        localStorage.setItem('replace', this._replace);
       }
     });
   </script>
