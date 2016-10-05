@@ -1,6 +1,8 @@
 # \<regex\>
 
 Regex tester
+ 
+[DEMO](https://regex.systemics.ch)
 
 ## Install the Polymer-CLI
 
